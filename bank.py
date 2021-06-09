@@ -44,17 +44,17 @@ class Account:
             time=transaction["time"]
             print(f'{time.strftime("%D")}date of transaction{narration}, {amount}transacted,and now your balance is {balance}')
 
-    def repay_loan(self,amount):
+     def repay_loan(self,amount):
         if(amount)<0:
-            return f"Dear {self.name} you have been loaned an amount of {amount} your new balance is {self.balance}"
+              return f"Dear {self.name} you have been loaned an amount of {amount} your new balance is {self.balance}"
 
         elif  amount<self.loan:
-            self.loan-=amount
-            return f"Dear customer,you have paid your debt of {amount} your outstanding debt is {self.loan} "
-        else:
-            difference=amount-self.loan
-            self.balance+=difference
-            return f"Dear customer, you have succesfully paid your loan of {self.loan}, your new balance is{self.balance}"
+              self.loan-=amount
+              return f"Dear customer,you have paid your debt of {amount} your outstanding debt is {self.loan} "
+         else:
+              difference=amount-self.loan
+              self.balance+=difference
+              return f"Dear customer, you have succesfully paid your loan of {self.loan}, your new balance is{self.balance}"
 
 
                 
