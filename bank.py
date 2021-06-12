@@ -1,4 +1,5 @@
 from datetime import datetime, time
+from typing import Type
 
 class Account:
     def __init__(self,name,phone,transactions):
@@ -8,8 +9,13 @@ class Account:
         self.loan=0
         self.loan_limit=500
         self.transactions=[]
+   
 
     def deposit(self,amount):
+        try:
+            10+amount
+        except TypeError:
+             return f"The amount must be in figures"
         if amount<=0:
             return f"Amount must be greater than 0."  
         else:
@@ -44,37 +50,55 @@ class Account:
             time=transaction["time"]
             print(f'{time.strftime("%D")}date of transaction{narration}, {amount}transacted,and now your balance is {balance}')
 
-     def repay_loan(self,amount):
-        if(amount)<0:
+    def repay_loan(self,amount):
+        if(amount)>0:
               return f"Dear {self.name} you have been loaned an amount of {amount} your new balance is {self.balance}"
 
         elif  amount<self.loan:
               self.loan-=amount
               return f"Dear customer,you have paid your debt of {amount} your outstanding debt is {self.loan} "
-         else:
+        else:
               difference=amount-self.loan
               self.balance+=difference
+              self.loan=0
               return f"Dear customer, you have succesfully paid your loan of {self.loan}, your new balance is{self.balance}"
 
+    def Transfer(self,amount,account):
+            try:
+             10+amount
+            except TypeError:
+                return f"the amount must be in figures"
+            fee = amount * 0.05
 
-                
-                          
+            if amount>0:
+                    return f"the amount is less than zero"
+            if amount + fee > self.balance:
+                return f"your balance is {self.balance},you need{amount+fee} "
+            else:
+                self.balance=amount+fee 
+                account.deposit(amount)
+                return f"You have transferred succesfully" 
+
+class MobileMoneyAccount(Account):
+    def __init__(self,name,phone,service_provider):
+        super().__init__(name,phone)
+        self.service_provider=service_provider
+        self.limit=300000
+    def buy_airtime(self,amount):
+        try:
+            1+amount
+        except TypeError:
+            return f"The amount must be in figures"
+        if amount<5:
+            return f"Dear {self.name} you have to purchase KES 5 or more"
+        else:
+            self.balance-=amount
+            return f"Dear {self.name} you have successfully purchased {amount} airtime.Your new balance is{self.balance}"
+
+    
         
-                        
+        
+         
 
-                          
-                        
-                        
-                
-                 
+        
 
-
-
-
-                
-                   
-
-
-
-                    
-   
